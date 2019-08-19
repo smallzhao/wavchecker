@@ -1,0 +1,61 @@
+{
+  "apiVersion": "batch/v1",
+  "kind": "Job",
+  "metadata": {
+    "name": "${jobName}",
+    "namespace": "dataproc",
+    "labels": {
+      "app": "seldon",
+      "ksonnet.io/component": "${projectName}"
+    },
+    "annotations": {
+      "batch_version": "v1",
+      "project_name": "${projectName}"
+    }
+  },
+  "spec": {
+    "template": {
+      "spec": {
+        "containers": [
+          {
+            "name": "${projectName}",
+            "image": "${image}",
+            "imagePullPolicy": "IfNotPresent",
+            "volumeMounts": [
+              {
+                "mountPath": "/input",
+                "name": "source-data-storage"
+              },
+              {
+                "mountPath": "/result",
+                "name": "result-data-storage"
+              }
+            ]
+          }
+        ],
+        "imagePullSecrets": [
+          {
+            "name": "regcred-secret"
+          }
+        ],
+        "volumes": [
+          {
+            "name": "result-data-storage",
+            "flexVolume": {
+              "driver": "fstab/cifs",
+              "fsType": "cifs",
+              "secretRef": {
+                "name": "${cifsSecretRef}"
+              },
+              "options": {
+                "networkPath": "${resultPath}",
+                "mountOptions": ""
+              }
+            }
+          }
+        ],
+        "restartPolicy": "Never"
+      }
+    }
+  }
+}
