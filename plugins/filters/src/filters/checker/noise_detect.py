@@ -5,6 +5,7 @@ import os
 import math
 import configparser
 import platform
+from filters.base import Filter
 
 import logging
 logger = logging.getLogger(__name__)
@@ -95,7 +96,7 @@ def sox_wav(in_path, category):
         os.makedirs(dir_path)
     def get_sox():
         if platform.system() == 'Windows':
-            sox_cmd = os.path.join(model_path, 'sox', 'sox.exe')
+            sox_cmd = os.path.join(os.path.dirname(model_path), 'utils', 'sox', 'sox.exe')
         else:
             sox_cmd = 'sox'
         return sox_cmd
@@ -115,6 +116,7 @@ def sox_wav(in_path, category):
 
 
 def calEnergy(wav_data):
+    # 每256个采样点为一帧，分帧计算每一帧的总能量
     ene = []
     total = 0
     for i in range(len(wav_data)):
@@ -128,6 +130,7 @@ def calEnergy(wav_data):
 
 
 def energy_mean(ene):
+    # 计算平均能量
     s = 0
     for i in ene:
         s = s + i
@@ -136,62 +139,63 @@ def energy_mean(ene):
     return m
 
 
-class NoiseDetect(object):
-    label = {}
+class NoiseDetect(Filter):
+    filter_type = 'noise'
 
-    def __init__(self, wavpath):
-        self.wavpath = wavpath
-        self.label = 'normal'
-
-    def detect(self, type):
-        sox_file = sox_wav(self.wavpath, type)
+    def detect(self, wavobj, type):
+        sox_file = sox_wav(wavobj.path, type)
         detect_wav_data = read_wav(sox_file, 'short')
         wav_ene = calEnergy(detect_wav_data)
         wav_mean = energy_mean(wav_ene)
         os.remove(sox_file)
         return wav_mean
 
-    def high_detect(self):
-        high_mean = self.detect('high')
+    def high_detect(self, wavobj):
+        high_mean = self.detect(wavobj, 'high')
         if high_mean < int(configure.get('mean_high_threshold1')):
-            self.label = 'high frequency loss'
+            label = 'high frequency loss'
         elif high_mean < int(configure.get('mean_high_threshold2')):
-            self.label = 'need manual detect'
+            label = self.not_known
         else:
-            self.label = 'normal'
+            label = self.normal
+        return label
 
-    def echo_detect(self):
-        echo_mean = self.detect('echo')
+    def echo_detect(self, wavobj):
+        echo_mean = self.detect(wavobj, 'echo')
         if echo_mean > int(configure.get('mean_echo_threshold')):
-            self.label = 'continue noise'
+            label = 'continue noise'
         else:
-            self.label = 'normal'
+            label = self.normal
+        return label
 
-    def low_detect(self):
-        low_mean = self.detect('low')
+    def low_detect(self, wavobj):
+        low_mean = self.detect(wavobj, 'low')
         if low_mean > int(configure.get('mean_low_threshold1')):
-            self.label = 'DC offset'
+            label = 'DC offset'
         elif low_mean > int(configure.get('mean_low_threshold2')):
-            self.label = 'continue noise'
+            label = 'continue noise'
         else:
-            self.label = 'normal'
+            label = self.normal
+        return label
 
-    def bottom_noise_detect(self):
-        detect_wav_data = read_wav(self.wavpath, 'int16')
+    def bottom_noise_detect(self, wavobj):
+        detect_wav_data = read_wav(wavobj.path, 'int16')
         wav_mean = db_mean(detect_wav_data)
         if wav_mean > int(configure.get('db_threshold')):
-            self.label = 'continue noise'
+            label = 'continue noise'
         else:
-            self.label = 'normal'
+            label = self.normal
+        return label
 
-    def handle(self):
+    def check(self, wavobj):
+        label = self.normal
         for checker in [self.high_detect, self.echo_detect, self.low_detect, self.bottom_noise_detect]:
-            if self.label == 'normal':
+            if label == 'pass':
                 try:
-                    checker()
+                    label = checker(wavobj)
                 except Exception as e:
                     self.label = 'audio damage'
-                    logger.error("The audio {} is damage, please check it".format(self.wavpath))
-
+                    logger.error("The audio {} is damage, please check it".format(wavobj.path))
             else:
-                break
+                return {self.filter_type: label}
+        return {self.filter_type: label}

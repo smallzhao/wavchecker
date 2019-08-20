@@ -76,3 +76,5 @@ demo/trial/data
 */build/
 */dist/
 *.zip
+plugins/filters/src/filters/utils/ffmpeg
+plugins/filters/src/filters/utils/sox

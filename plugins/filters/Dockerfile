@@ -6,7 +6,7 @@ RUN rm /etc/apt/sources.list
 COPY sources.list /etc/apt/sources.list
 
 RUN apt-get update
-RUN apt-get install -y sox python3-dev python3-pip
+RUN apt-get install -y sox python3-dev python3-pip ffmpeg
 
 COPY requirements.txt requirements.txt
 

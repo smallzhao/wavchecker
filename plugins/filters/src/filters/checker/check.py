@@ -25,12 +25,6 @@ class Checker(object):
     count_info = {'normal': 0, 'continue noise': 0, 'audio damage': 0, 'DC offset': 0, 'high frequency loss': 0, 'need manual detect': 0}
     ext = ['.wav', '.mp3']
 
-    def __init__(self, input, output, taskinfos):
-        self.input = input
-        self.output = output
-        self.taskinfos = taskinfos
-        self.result = []
-
     def input_check(self, task_id, group):
         if not task_id.isdigit():
             logger.error("Taskid muset be int")
