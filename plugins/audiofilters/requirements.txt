@@ -1,0 +1,6 @@
+numpy
+wave
+openpyxl
+matplotlib
+pyyaml
+pydub

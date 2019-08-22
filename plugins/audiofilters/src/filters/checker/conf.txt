@@ -1,0 +1,34 @@
+# 请输入你的WAV所在的文件夹的全路径和你要输出的输出文件夹的全路径
+
+[info]
+# 输入文件夹全路径
+in_path = E:\20190107
+# 输出文件夹全路径
+out_path = E:\result
+
+[db]
+# db阈值
+db_threshold = 50
+
+[low]
+# sox低频阈值
+sox_low_threshold = -10
+# 低频分类阈值1
+mean_low_threshold1 = 1000000
+# 低频分类阈值2
+mean_low_threshold2 = 25000
+
+[high]
+# sox高频阈值
+sox_high_threshold = 4500
+# 高频分类阈值1
+mean_high_threshold1 = 1000
+# 高频分类阈值2
+mean_high_threshold2 = 10000
+
+[echo]
+# sox回声阈值
+sox_echo_threshold = 6000
+# 回声分类阈值
+mean_echo_threshold = 29328026
+
