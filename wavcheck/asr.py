@@ -13,7 +13,7 @@ from kubernetes.stream import stream
 from kubernetes.client.rest import ApiException
 
 
-DATADIR = '/home/toolkit/ToolKit/data/wavcheck'
+DATADIR = '/data'
 
 
 FIELD_MANAGER = 'field_manager'
@@ -22,8 +22,6 @@ LOG_INTERVAL = 2
 
 MountedPath = namedtuple('MountedPath', ['username', 'password', 'path'])
 normpath = lambda x: x.replace('\\', '/')
-
-FILTERS = ['noise', 'clip', 'snr', 'emptyenergy', 'am_detect']
 
 def parse_mount_path(mount_path):
     credential, _, path = mount_path.partition('@')
@@ -37,7 +35,7 @@ def parse_mount_path(mount_path):
 
 
 def init_api_client():
-    kube_config_path = os.environ.get('KUBE_CONFIG')
+    kube_config_path = '/.kube/config'
     if not kube_config_path:
         print("Unable to find env var: KUBE_CONFIG")
         sys.exit(1)
@@ -81,39 +79,27 @@ def get_mountinpath(inputpath, username):
                     "10.10.9.206:6789"
                 ],
                 "secretRef": {
-                    "name": "cephfsSecret"
+                    "name": "%s-cifs-secret" % username
                 },
-                "user": "cephfsUser",
+                "user": "k8sfs",
                 "path": "/k8sfs/satellite",
                 "readOnly": True
             }
         }
     return mountinpath
 
-
-def combine(args):
-    # 参数拼接
-    filter_args = []
-    for filter in FILTERS:
-        if getattr(args, filter):
-            if getattr(args, 'args_'+filter):
-                filter_args.append('-'.join([filter, getattr(args, 'args_'+filter)]))
-            else:
-                filter_args.append(filter)
-    return '@'.join(filter_args)
-
-
 def get_context(args):
     mounted_in_path = normpath(args.input)
     mounted_out = parse_mount_path(args.result)
     mount_in_info = get_mountinpath(mounted_in_path, mounted_out.username)
-    detect_type = combine(args)
+    detect_type = args.filter
     groupsinfo = args.groupsinfo.read() if args.groupsinfo else ''
 
 
     encrypt = lambda x: base64.b64encode(x.encode()).decode()
     context = {
         "group": groupsinfo,
+        "projectName": args.filter,
         "jobName": args.name,
         "mountinpath": mount_in_info,
         "resultPath": mounted_out.path,
@@ -226,7 +212,7 @@ def run(args):
     api_client = init_api_client()
     secret_manifest = get_manifest(os.path.join(DATADIR, 'secret_spec.json'), context)
     get_or_create_secret(api_client, context['cifsSecretRef'], NAMESPACE, secret_manifest)
-    job_manifest = get_manifest(os.path.join(DATADIR, 'job_spec_wavcheck.json'), context)
+    job_manifest = get_manifest(os.path.join(DATADIR, 'job_spec.json'), context)
     job_manifest = update_mountpath(job_manifest, context)
     print(job_manifest)
     get_or_create_job(api_client, context['jobName'], NAMESPACE, job_manifest)
@@ -234,27 +220,11 @@ def run(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Launches a task on kuberbetes.")
-
-    parser.add_argument('--name', type=str, required=True, help="Job名称，只能包含英文、数字、下划线、中划线")
-    parser.add_argument('--input', type=str, required=True, help='数据源路径, 使用/path/to/input或C:\\input\\path的格式',
-                        default=None)
-    parser.add_argument('--result', type=str, required=True, help='结果数据路径, 使用/path/to/result或C:\\result\\path的格式',
-                        default=None)
-
-    parser.add_argument('--groupsinfo', type=argparse.FileType('r'), help='组号文件')
-    parser.add_argument('--noise', action='store_true', help='噪音检测器')
-    parser.add_argument('--args_noise', type=str, help='噪音检测参数')
-    # parser.add_argument('--energylost', type=str, required=True, action='store_false', help='能量缺失检测器')
-    parser.add_argument('--clip', action='store_true', help='截幅检测器')
-    parser.add_argument('--args_clip', type=str, help='截幅检测器')
-    parser.add_argument('--snr', action='store_true', help='信噪比检测器')
-    parser.add_argument('--args_snr', type=str, help='信噪比检测器')
-    parser.add_argument('--emptyenergy', action='store_true', help='空能量检测器')
-    parser.add_argument('--args_emptyenergy', type=str, help='空能量检测器')
-    parser.add_argument('--am_detect', action='store_true', help='振幅检测器')
-    parser.add_argument('--args_am_detect', type=str, help='振幅检测器')
-    #
-    # parser.add_argument('--energylost', type=str, required=True, action='store_false', help='能量缺失检测器')
+    parser.add_argument('--name', type=str, required=True, help='Job名称，只能包含英文、数字、下划线、中划线')
+    parser.add_argument('--input', required=True, help='数据源路径, 使用/path/to/input或C:\\input\\path的格式', type=str, default=None)
+    parser.add_argument('--result', required=True, help='结果数据路径, 使用/path/to/result或C:\\result\\path的格式', type=str, default=None)
+    parser.add_argument('--filter', type=str, required=True, default='mandarin-asr', help='质量检测器组，使用noise@energylost@clip组合')
+    parser.add_argument('--groupsinfo', type=argparse.FileType('r'), required=False, help='组号文件')
 
     args = parser.parse_args()
     run(args)

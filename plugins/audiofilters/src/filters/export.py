@@ -1,22 +1,20 @@
 import os
 import time
-from collections import defaultdict
-from functools import reduce
 from filters.utils.serialize import dump_xlsx
+from settings import FILTERS
 
 
 class Export():
     wb_content = {
-        '统计': [['任务ID', '号段', '总数', '正常', '异常', '需人工质检']],
-        '明细': [['任务ID', '号段', '音频路径', 'noise', 'energylost', 'clip']]
+        # '统计': [['任务ID', '号段', '总数', '正常', '异常', '需人工质检']],
+        '明细': [['任务ID', '号段', '音频路径'] + FILTERS]
     }
-    types = ['noise', 'energylost', 'clip']
 
     def get_rows(self, wavs):
         rows = []
         for wav in wavs:
             row = [wav.task_id, wav.group, wav.path]
-            for type in self.types:
+            for type in FILTERS:
                 row.append(wav.labels.get(type, ''))
             rows.append(row)
         return rows

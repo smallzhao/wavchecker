@@ -9,7 +9,7 @@ COPY requirements.txt app-requirements.txt
 RUN export PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple/ && \
     pip install --no-cache-dir -r app-requirements.txt
 
-COPY wavcheck.py wavcheck.py
+COPY asr.py wavcheck.py
 RUN python manage.py addscript wavcheck.py
 
 COPY .kube /.kube

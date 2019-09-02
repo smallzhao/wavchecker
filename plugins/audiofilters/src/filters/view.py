@@ -1,14 +1,19 @@
 from filters import base, fetcher
-from filters.checker import noise_detect
+from filters.noise import noise_detect
 from filters.energylost import energylost
 from filters.clip import clip
+from filters.snr import snr
+from filters.am_detect import am_detect
 from filters.export import Export
+
 
 class View():
     filter_map = {
         'energylost': energylost.EnergyLost,
         'noise': noise_detect.NoiseDetect,
-        'clip': clip.ClippingDetection
+        'clip': clip.ClippingDetection,
+        'snr': snr.SNR,
+        'am_detect': am_detect.AMDetect
     }
 
     def __init__(self, input, output, args, taskinfos=None):
