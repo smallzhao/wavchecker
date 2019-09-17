@@ -8,6 +8,9 @@ import numpy as np
 from filters.base import Filter
 from settings import DEFAULT_BINS_NUM, DEFAULT_WINDOW_WIDTH
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 class ClippingDetection(Filter):
     """
@@ -123,10 +126,12 @@ class ClippingDetection(Filter):
         """
         Takes the path of a .wav file, and returns the proportion of clipping.
         """
+        logger.info("Start check clip {}".format(wavobj.path))
         samples, num_samples = self.__get_samples(wavobj)
         fragments = self.__split_to_fragments(samples, num_samples, N=DEFAULT_WINDOW_WIDTH)
         judge_fragments = self.__is_valid_fragments(fragments)
         is_clippings = self.__is_clippings(fragments)
         clipping_proportion = self.get_clipping_proportion(is_clippings, judge_fragments)
+        logger.info("Check clip over")
         return {self.filter_type: clipping_proportion}
 

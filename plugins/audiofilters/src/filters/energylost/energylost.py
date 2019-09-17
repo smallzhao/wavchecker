@@ -2,6 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from filters.base import Filter
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 class EnergyLost(Filter):
     normal_prop = 0.75
@@ -76,8 +79,10 @@ class EnergyLost(Filter):
         return label
 
     def check(self, wavobj):
+        logger.info("Start check energylost {}".format(wavobj.path))
         spectrum = self.get_spectrum(wavobj)
         label = self.get_state(spectrum)
+        logger.info("Check energylost over")
         return {self.filter_type: label}
 
 

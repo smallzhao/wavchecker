@@ -78,3 +78,4 @@ demo/trial/data
 *.zip
 plugins/filters/src/filters/utils/ffmpeg
 plugins/filters/src/filters/utils/sox
+data/

@@ -7,6 +7,8 @@ import webrtcvad
 from functools import reduce
 from filters.base import Filter
 
+import logging
+logger = logging.getLogger(__name__)
 
 FRAME_DURATION = 0.01
 DEFAULT_PARAMS_OF_WEBRTC = {'Min_Silence': 0.1, 'Min_Speech': 0.05}
@@ -16,6 +18,7 @@ class SNR(Filter):
     filter_type = 'snr'
 
     def check(self, wavobj):
+        logger.info("Start check snr {}".format(wavobj.path))
         sound_name = os.path.normpath(wavobj.path)
         assert os.path.exists(sound_name), 'Source sound file does not exist!'
         if not wavobj.data:
@@ -24,6 +27,7 @@ class SNR(Filter):
         bounds_of_speech = list(detect_spoken_frames_with_webrtc(wavobj.data, wavobj.sample_rate))  # 端点检测
         # print(bounds_of_speech)
         snr = calculate_SNR(wavobj.data, wavobj.sample_rate, bounds_of_speech)  # 信噪比计算
+        logger.info("Check snr over")
         return {self.filter_type: snr}
 
 

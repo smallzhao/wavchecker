@@ -13,7 +13,7 @@ from kubernetes.stream import stream
 from kubernetes.client.rest import ApiException
 
 
-DATADIR = '/data'
+DATADIR = '/home/toolkit/ToolKit/data/asr'
 
 
 FIELD_MANAGER = 'field_manager'
@@ -35,7 +35,7 @@ def parse_mount_path(mount_path):
 
 
 def init_api_client():
-    kube_config_path = '/.kube/config'
+    kube_config_path = os.environ.get('KUBE_CONFIG')
     if not kube_config_path:
         print("Unable to find env var: KUBE_CONFIG")
         sys.exit(1)
@@ -79,7 +79,7 @@ def get_mountinpath(inputpath, username):
                     "10.10.9.206:6789"
                 ],
                 "secretRef": {
-                    "name": "%s-cifs-secret" % username
+                    "name": "cephfs-secret"
                 },
                 "user": "k8sfs",
                 "path": "/k8sfs/satellite",
@@ -107,7 +107,7 @@ def get_context(args):
         "username": encrypt(mounted_out.username),
         "password": encrypt(mounted_out.password),
         "args": detect_type,
-        "image": 'registry.cn-beijing.aliyuncs.com/shujutang/audiofilters:v0.1'
+        "image": 'registry.cn-beijing.aliyuncs.com/shujutang/mandarin-asr:v0.3'
     }
     return context
 
@@ -212,7 +212,7 @@ def run(args):
     api_client = init_api_client()
     secret_manifest = get_manifest(os.path.join(DATADIR, 'secret_spec.json'), context)
     get_or_create_secret(api_client, context['cifsSecretRef'], NAMESPACE, secret_manifest)
-    job_manifest = get_manifest(os.path.join(DATADIR, 'job_spec.json'), context)
+    job_manifest = get_manifest(os.path.join(DATADIR, 'job_spec_asr.json'), context)
     job_manifest = update_mountpath(job_manifest, context)
     print(job_manifest)
     get_or_create_job(api_client, context['jobName'], NAMESPACE, job_manifest)

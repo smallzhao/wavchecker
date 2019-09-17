@@ -15,7 +15,7 @@ from pydub import AudioSegment, exceptions
 
 
 import logging
-logger = logging.getLogger('filter.am_detect')
+logger = logging.getLogger(__name__)
 
 
 model_path = os.path.dirname(os.path.abspath(__file__))
@@ -39,13 +39,14 @@ class AMDetect(Filter):
         return int(high_energy), float(high_persent), int(low_energy), float(low_persent)
 
     def check(self, wavobj):
+        logger.info("Start check am_detect {}".format(wavobj.path))
         vadobj = vad.VAD()
         frames = vadobj.frame_generator(wavobj)
         voiced_frames = vadobj.total_vad_frames_collector(wavobj, frames)
-
         # logger.info("Voiced frames {}".format(len(voiced_frames)))
         crests = self.get_crest_frames(voiced_frames)
         label = self.get_label(crests)
+        logger.info("Check am_detect over")
         return {self.filter_type: label}
 
     def get_crest_frames(self, voiced_frames):
@@ -70,7 +71,7 @@ class AMDetect(Filter):
         high_label = 'invalid'
         low_label = 'invalid'
 
-        high_energy, low_energy, high_persent, low_persent = self.parser()
+        high_energy, high_persent, low_energy, low_persent = self.parser()
 
         for frame in crests:
             if frame > high_energy:

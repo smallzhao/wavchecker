@@ -3,6 +3,9 @@ import time
 from filters.utils.serialize import dump_xlsx
 from settings import FILTERS
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 class Export():
     wb_content = {
@@ -51,3 +54,4 @@ class Export():
         if not os.path.exists(dir_path):
             os.makedirs(dir_path)
         dump_xlsx(self.wb_content, dest_path)
+        logger.info("Dumps result successfully")

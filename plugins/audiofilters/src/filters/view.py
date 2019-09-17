@@ -1,3 +1,5 @@
+import json
+import base64
 from filters import base, fetcher
 from filters.noise import noise_detect
 from filters.energylost import energylost
@@ -5,6 +7,9 @@ from filters.clip import clip
 from filters.snr import snr
 from filters.am_detect import am_detect
 from filters.export import Export
+
+import logging
+logger = logging.getLogger(__name__)
 
 
 class View():
@@ -31,9 +36,10 @@ class View():
 
         tasks_infos = []
         if self.taskinfos:
-            for taskinfo in self.taskinfos.split('\n'):
-                task_id, group = taskinfo.split('\t')
+            taskinfos = json.loads(base64.b64decode(self.taskinfos).decode('utf-8'))
+            for task_id, group in taskinfos:
                 tasks_infos.append((task_id, group))
+        logger.info("Get gorpus {}".format(tasks_infos))
         return args_json, tasks_infos
 
     def check(self, wavs, filters):
@@ -46,6 +52,7 @@ class View():
         args_json, task_infos = self.parser()
         # 检测器实例化
         filters = [self.filter_map[type](args) for type, args in args_json.items()]
+        logger.info("Start fetch files with {} {}".format(args_json, task_infos))
         fetch = fetcher.Fetcher(task_infos)
         wavs = []
         for wavfile in fetch.fetch(self.input):

@@ -63,6 +63,7 @@ class Fetcher():
         except Exception as e:
             logger.error("the file is damage {}".format(path))
             pcm_data, sample_rate, sample_width, num_channels = '', '', '', ''
+        logger.info("Read {} successfully".format(path))
         return pcm_data, sample_rate, sample_width, num_channels
 
     # def write_wave(self, path, audio, sample_rate):

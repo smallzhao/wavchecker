@@ -188,6 +188,7 @@ class NoiseDetect(Filter):
         return label
 
     def check(self, wavobj):
+        logger.info("Start check noise {}".format(wavobj.path))
         label = self.normal
         for checker in [self.high_detect, self.echo_detect, self.low_detect, self.bottom_noise_detect]:
             if label == 'pass':
@@ -198,4 +199,5 @@ class NoiseDetect(Filter):
                     logger.error("The audio {} is damage, please check it".format(wavobj.path))
             else:
                 return {self.filter_type: label}
+        logger.info("Check noise over")
         return {self.filter_type: label}

@@ -20,20 +20,10 @@ FIELD_MANAGER = 'field_manager'
 NAMESPACE = 'dataproc'
 LOG_INTERVAL = 2
 
-MountedPath = namedtuple('MountedPath', ['username', 'password', 'path'])
+Secret = namedtuple('Secret', ['username', 'password'])
 normpath = lambda x: x.replace('\\', '/')
 
-FILTERS = ['noise', 'clip', 'snr', 'emptyenergy', 'am_detect']
-
-def parse_mount_path(mount_path):
-    credential, _, path = mount_path.partition('@')
-    norm_path = normpath(path)
-    try:
-        username, password = credential.split(':')
-    except ValueError as e:
-        print("Path is not provided as required: %s" % mount_path)
-        sys.exit(1)
-    return MountedPath(username, password, norm_path)
+FILTERS = ['noise', 'clip', 'snr', 'energylost', 'am_detect']
 
 
 def init_api_client():
@@ -56,7 +46,7 @@ def init_api_client():
 
 
 def get_mountinpath(inputpath, username):
-    if inputpath:
+    if inputpath != 'online':
         mountinpath = {
             "name": "source-data-storage",
             "flexVolume": {
@@ -81,9 +71,9 @@ def get_mountinpath(inputpath, username):
                     "10.10.9.206:6789"
                 ],
                 "secretRef": {
-                    "name": "cephfsSecret"
+                    "name": "cephfs-secret"
                 },
-                "user": "cephfsUser",
+                "user": "k8sfs",
                 "path": "/k8sfs/satellite",
                 "readOnly": True
             }
@@ -102,26 +92,41 @@ def combine(args):
                 filter_args.append(filter)
     return '@'.join(filter_args)
 
+def get_secret(secret):
+    try:
+        username, password = secret.split(':')
+    except ValueError as e:
+        print("secret not provided as required: %s" % secret)
+        sys.exit(1)
+    return Secret(username, password)
+
+def get_groups(fileobj):
+    groups = []
+    for line in fileobj.readlines():
+        task_id, group = line.split(',')
+        groups.append((task_id.strip(), group.strip()))
+    return json.dumps(groups)
 
 def get_context(args):
     mounted_in_path = normpath(args.input)
-    mounted_out = parse_mount_path(args.result)
-    mount_in_info = get_mountinpath(mounted_in_path, mounted_out.username)
+    mounted_out_path = normpath(args.result)
+    secret = get_secret(args.secret)
+    mount_in_info = get_mountinpath(mounted_in_path, secret.username)
     detect_type = combine(args)
-    groupsinfo = args.groupsinfo.read() if args.groupsinfo else ''
+    groupsinfo = get_groups(args.groupsinfo) if args.groupsinfo else ''
 
 
     encrypt = lambda x: base64.b64encode(x.encode()).decode()
     context = {
-        "group": groupsinfo,
+        "group": encrypt(groupsinfo),
         "jobName": args.name,
         "mountinpath": mount_in_info,
-        "resultPath": mounted_out.path,
-        "cifsSecretRef":  "%s-cifs-secret" % mounted_out.username,
-        "username": encrypt(mounted_out.username),
-        "password": encrypt(mounted_out.password),
+        "resultPath": mounted_out_path,
+        "cifsSecretRef":  "%s-cifs-secret" % secret.username,
+        "username": encrypt(secret.username),
+        "password": encrypt(secret.password),
         "args": detect_type,
-        "image": 'registry.cn-beijing.aliyuncs.com/shujutang/audiofilters:v0.1'
+        "image": 'registry.cn-beijing.aliyuncs.com/shujutang/audiofilters:v0.6'
     }
     return context
 
@@ -236,25 +241,26 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Launches a task on kuberbetes.")
 
     parser.add_argument('--name', type=str, required=True, help="Job名称，只能包含英文、数字、下划线、中划线")
-    parser.add_argument('--input', type=str, required=True, help='数据源路径, 使用/path/to/input或C:\\input\\path的格式',
+    parser.add_argument('--input', type=str, required=True, help='数据源路径, 线上输入 online,线下数据ftp路径,如：//10.10.8.123/500小时中英混读语音采集标注',
                         default=None)
-    parser.add_argument('--result', type=str, required=True, help='结果数据路径, 使用/path/to/result或C:\\result\\path的格式',
+    parser.add_argument('--result', type=str, required=True, help='结果数据路径, ftp路径,使用“//10.10.8.123/500小时中英混读语音采集标注”这样格式',
+                        default=None)
+    parser.add_argument('--secret', type=str, required=True, help='ftp账户密码, 使用name:password格式,如xiaoming:zaixian2016',
                         default=None)
 
-    parser.add_argument('--groupsinfo', type=argparse.FileType('r'), help='组号文件')
+    parser.add_argument('--groupsinfo', type=argparse.FileType('r'), help='组号文件,excel文件第一列为任务id,第二列为组号')
     parser.add_argument('--noise', action='store_true', help='噪音检测器')
     parser.add_argument('--args_noise', type=str, help='噪音检测参数')
-    # parser.add_argument('--energylost', type=str, required=True, action='store_false', help='能量缺失检测器')
+    parser.add_argument('--energylost', action='store_true', help='能量缺失检测器')
+    parser.add_argument('--args_energylost', type=str, help='能量丢失检测器')
     parser.add_argument('--clip', action='store_true', help='截幅检测器')
     parser.add_argument('--args_clip', type=str, help='截幅检测器')
     parser.add_argument('--snr', action='store_true', help='信噪比检测器')
     parser.add_argument('--args_snr', type=str, help='信噪比检测器')
-    parser.add_argument('--emptyenergy', action='store_true', help='空能量检测器')
-    parser.add_argument('--args_emptyenergy', type=str, help='空能量检测器')
+    # parser.add_argument('--emptyenergy', action='store_true', help='空能量检测器')
+    # parser.add_argument('--args_emptyenergy', type=str, help='空能量检测器')
     parser.add_argument('--am_detect', action='store_true', help='振幅检测器')
     parser.add_argument('--args_am_detect', type=str, help='振幅检测器')
-    #
-    # parser.add_argument('--energylost', type=str, required=True, action='store_false', help='能量缺失检测器')
 
     args = parser.parse_args()
     run(args)
