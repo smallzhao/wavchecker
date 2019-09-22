@@ -1,5 +1,5 @@
 
-FILTERS = ['noise', 'energylost', 'clip', 'snr', 'am_detect']
+FILTERS = ['noise', 'energylost', 'clip', 'snr', 'am_detect', 'disturb_detect']
 
 # clip args
 # DEFAULT_BINS_NUM - The default number of bins.

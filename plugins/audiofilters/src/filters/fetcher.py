@@ -52,7 +52,7 @@ class Fetcher():
         task_id, group, filepath = file
         audio, sample_rate, sample_width, num_channels = self.read_wave(filepath)
         if not (num_channels == 1 and sample_width == 2 and sample_rate in (8000, 16000, 32000, 48000)):
-            dst = os.path.join(os.path.dirname(filepath), 'result.wav')
+            dst = '/tmp/result.wav'
             audio, sample_rate, sample_width, num_channels = self.transform(filepath, dst)
         return Wav(filepath, task_id, group, audio, sample_rate, sample_width)
 

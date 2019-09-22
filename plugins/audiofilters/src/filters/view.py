@@ -2,10 +2,11 @@ import json
 import base64
 from filters import base, fetcher
 from filters.noise import noise_detect
-from filters.energylost import energylost
+from filters.energylost import check
 from filters.clip import clip
 from filters.snr import snr
 from filters.am_detect import am_detect
+from filters.disturb_detect import detect
 from filters.export import Export
 
 import logging
@@ -14,11 +15,12 @@ logger = logging.getLogger(__name__)
 
 class View():
     filter_map = {
-        'energylost': energylost.EnergyLost,
+        'energylost': check.EnergyLost,
         'noise': noise_detect.NoiseDetect,
         'clip': clip.ClippingDetection,
         'snr': snr.SNR,
-        'am_detect': am_detect.AMDetect
+        'am_detect': am_detect.AMDetect,
+        'disturb_detect': detect.DisturbDetect
     }
 
     def __init__(self, input, output, args, taskinfos=None):

@@ -107,7 +107,7 @@ def get_context(args):
         "username": encrypt(mounted_out.username),
         "password": encrypt(mounted_out.password),
         "args": detect_type,
-        "image": 'registry.cn-beijing.aliyuncs.com/shujutang/mandarin-asr:v0.3'
+        "image": 'registry.cn-beijing.aliyuncs.com/shujutang/mandarin-asr:v0.4'
     }
     return context
 
