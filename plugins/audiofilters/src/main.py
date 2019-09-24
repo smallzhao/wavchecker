@@ -12,6 +12,8 @@ def main(input, result, args, taskinfos=None):
 if __name__ == '__main__':
     taskinfos = os.environ.get('taskinfos')
     args = os.environ.get('args')
+    if taskinfos == 'null':
+        taskinfos = ''
 
     main('/input', '/result', args, taskinfos=taskinfos)
 

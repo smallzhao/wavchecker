@@ -1,4 +1,5 @@
 import os
+import re
 import subprocess
 from filters.base import Filter
 
@@ -13,14 +14,15 @@ class EnergyLost(Filter):
         lossenergy = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'energylost/lossenergy')
         cmd_line = "{lossenergy} {wavpath}".format(lossenergy=lossenergy, wavpath=wavobj.path)
         try:
-            result = subprocess.check_output(cmd_line)
+            result = subprocess.check_output(cmd_line, shell=True)
         except Exception as e:
             logger.error("Subporcess lossenergy commond faild {}".format(cmd_line))
             result = ''
-        if result.strip() == 'ok':
+        res = result.decode().strip()
+        if res == 'ok':
             return 'valid'
-        elif result.strip().startswith('invalid'):
-            return result.strip().replace('invalid\t', '')
+        elif re.match('invalid\\t.*', res):
+            return res.replace('invalid\t', '')
         else:
             logger.error(result)
             return 'damage'

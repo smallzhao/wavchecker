@@ -23,7 +23,7 @@ LOG_INTERVAL = 2
 Secret = namedtuple('Secret', ['username', 'password'])
 normpath = lambda x: x.replace('\\', '/')
 
-FILTERS = ['noise', 'clip', 'snr', 'energylost', 'am_detect']
+FILTERS = ['noise', 'clip', 'snr', 'energylost', 'am_detect', 'disturb_detect']
 
 
 def init_api_client():
@@ -126,7 +126,7 @@ def get_context(args):
         "username": encrypt(secret.username),
         "password": encrypt(secret.password),
         "args": detect_type,
-        "image": 'registry.cn-beijing.aliyuncs.com/shujutang/audiofilters:v0.6'
+        "image": 'registry.cn-beijing.aliyuncs.com/shujutang/audiofilters:v0.2'
     }
     return context
 
@@ -257,6 +257,8 @@ if __name__ == '__main__':
     parser.add_argument('--args_clip', type=str, help='截幅检测器')
     parser.add_argument('--snr', action='store_true', help='信噪比检测器')
     parser.add_argument('--args_snr', type=str, help='信噪比检测器')
+    parser.add_argument('--disturb_detect', action='store_true', help='干扰音检测器')
+    parser.add_argument('--args_disturb_detect', type=str, help='干扰音检测器')
     # parser.add_argument('--emptyenergy', action='store_true', help='空能量检测器')
     # parser.add_argument('--args_emptyenergy', type=str, help='空能量检测器')
     parser.add_argument('--am_detect', action='store_true', help='振幅检测器')

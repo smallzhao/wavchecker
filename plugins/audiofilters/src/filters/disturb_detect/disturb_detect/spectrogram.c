@@ -418,7 +418,7 @@ main (int argc, char * argv [])
 	if (rr!=0) 
 	{
 		printf("invalid:%d\n",rr );
-		return rr;
+		return 0;
 	}else
 	{
 		printf("ok\n");

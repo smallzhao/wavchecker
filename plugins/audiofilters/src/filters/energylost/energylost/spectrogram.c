@@ -427,9 +427,10 @@ render_to_surface (const RENDER * render, SNDFILE *infile, int samplerate, sf_co
     printf("_____________spec_avg______________\n");
 	for (int spec_i = 0 ; spec_i < speclen ; spec_i++)
 	{
-		printf("%.2f ",spec_sum[spec_i]/width);
+		printf("%.3f ",spec_sum[spec_i]/width);
 	}
 	*/
+	
 	
 	
 
@@ -452,16 +453,9 @@ render_to_surface (const RENDER * render, SNDFILE *infile, int samplerate, sf_co
 	}
 	*/
 
-	/*
-	printf("_____________precent_of_spec_below_avg______________\n");
-	for (int spec_i = 0 ; spec_i < speclen ; spec_i++)
-	{
-		printf("%.2f ",num_of_spec_below_avg[spec_i]/width);
-	}
-	*/
-	int count=0,warning1=0,warning2=0;
+	int count=0,warning1=0,warning2=0,warning3=0;
 
-	printf("detect ");
+//	printf("detect ");
 	//连续5个点低于0.65的段数量不应该大于5
 	for (int spec_i = 800 ; spec_i < speclen ; spec_i++)
 		{
@@ -483,9 +477,14 @@ render_to_surface (const RENDER * render, SNDFILE *infile, int samplerate, sf_co
 		}
 	}
 
-//	if (warning1>4 && warning2>4) {printf("loss warning1=%d\twarning1=%d\n",warning1,warning2);} else {printf("ok\n");}
-    if (warning1>4 && warning2>4) {printf("invalid\t%d\t%d\n",warning1,warning2);} else {printf("ok\n");}
+	//判断最高的2%的频率的总能量是否超过0.5，不操过的都是有丢失的
+	for (int spec_i = 980 ; spec_i < speclen ; spec_i++)
+	{
+		if (spec_sum[spec_i]<0.5) warning3++;
+	}
 
+//	if ((warning1>4 && warning2>4) || (warning3>10)) {printf("loss warning1=%d\twarning2=%d\twarning3=%d\n",warning1,warning2,warning3);} else {printf("ok\n");}
+    if ((warning1>4 && warning2>4) || (warning3>10)) {printf("invalid\t%d\t%d\t%d\n",warning1,warning2,warning3);} else {printf("ok\n");}
 	/*
 	for (int th=5;th<15;th++) {printf("\t%d",th);};
 

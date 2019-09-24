@@ -1,4 +1,5 @@
 import os
+import re
 import subprocess
 from filters.base import Filter
 
@@ -11,17 +12,18 @@ class DisturbDetect(Filter):
     filter_type = 'disturb_detect'
 
     def process(self, wavobj):
-        disturb_detect = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'disturb_detect/disturb_detect')
+        disturb_detect = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'disturb_detect/disturb-detect')
         cmd_line = "{disturb_detect} {wavpath}".format(disturb_detect=disturb_detect, wavpath=wavobj.path)
         try:
-            result = subprocess.check_output(cmd_line)
+            result = subprocess.check_output(cmd_line, shell=True)
         except Exception as e:
             logger.error("Subporcess disturb_detect commond faild {}".format(cmd_line))
             result = ''
-        if result.strip() == 'ok':
+        res = result.decode().strip()
+        if res == 'ok':
             return 'valid'
-        elif result.strip().startswith('invalid'):
-            return result.strip().strip('invalid:').strip()
+        elif re.match('invalid.*', res):
+            return res.strip('invalid:').strip()
         else:
             logger.error(result)
             return 'damage'
