@@ -484,7 +484,7 @@ render_to_surface (const RENDER * render, SNDFILE *infile, int samplerate, sf_co
 	}
 
 //	if ((warning1>4 && warning2>4) || (warning3>10)) {printf("loss warning1=%d\twarning2=%d\twarning3=%d\n",warning1,warning2,warning3);} else {printf("ok\n");}
-    if ((warning1>4 && warning2>4) || (warning3>10)) {printf("invalid\t%d\t%d\t%d\n",warning1,warning2,warning3);} else {printf("ok\n");}
+    if ((warning1>4 && warning2>4) || (warning3>10)) {printf("invalid\t%d|%d|%d\n",warning1,warning2,warning3);} else {printf("ok\n");}
 	/*
 	for (int th=5;th<15;th++) {printf("\t%d",th);};
 
