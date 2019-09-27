@@ -21,8 +21,8 @@ if __name__ == '__main__':
     #     import time
     #     time.sleep(3)
 
-    # input = r'C:\Users\Aorus\Desktop\test\测试'
-    # output = r'C:\Users\Aorus\Desktop\test\测试'
+    # input = r'C:\Users\Aorus\Desktop\空能量数据样例\9_2_空能量\不合格'
+    # output = r'C:\Users\Aorus\Desktop\空能量数据样例\9_2_空能量'
     # args = 'energylost@disturb_detect'
 
     # groups = []
@@ -32,5 +32,5 @@ if __name__ == '__main__':
     #         groups.append((task_id.strip(), group.strip()))
     # taskinfos = base64.b64encode(json.dumps(groups).encode())
     # taskinfos = ''
-
+    #
     # main(input, output, args, taskinfos=taskinfos)

@@ -45,6 +45,9 @@ class AMDetect(Filter):
         voiced_frames = vadobj.total_vad_frames_collector(wavobj, frames)
         # logger.info("Voiced frames {}".format(len(voiced_frames)))
         crests = self.get_crest_frames(voiced_frames)
+        if len(crests) == 0:
+            logger.error("Can't find voiced frames in {}".format(wavobj.path))
+            return {self.filter_type: 'damage'}
         label = self.get_label(crests)
         logger.info("Check am_detect over")
         return {self.filter_type: label}
