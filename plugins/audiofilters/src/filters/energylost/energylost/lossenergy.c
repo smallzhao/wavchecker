@@ -423,126 +423,20 @@ render_to_surface (const RENDER * render, SNDFILE *infile, int samplerate, sf_co
 			spec_sum[spec_i]+=spec_x[w][spec_i];
 		}
     
-    /*
-    printf("_____________spec_avg______________\n");
-	for (int spec_i = 0 ; spec_i < speclen ; spec_i++)
+
+	int count1=0,count2=0;;
+	for (int spec_i = 450 ; spec_i < speclen ; spec_i++)
 	{
-		printf("%.3f ",spec_sum[spec_i]/width);
-	}
-	*/
-	
-	
-	
-	
-
-	float * num_of_spec_below_avg = NULL ; 
-	num_of_spec_below_avg = calloc (speclen, sizeof (float *)) ;
-	for (int spec_i = 0 ; spec_i < speclen ; spec_i++)
-	{
-		for (w = 0 ; w < width ; w++)
-		{
-			if (spec_x[w][spec_i]< (spec_sum[spec_i]/width)) 
-				{num_of_spec_below_avg[spec_i]++;};
-		}
-	}
-
-	/*
-    printf("_____________num_of_spec_below_avg______________\n");
-	for (int spec_i = 0 ; spec_i < speclen ; spec_i++)
-	{
-		printf("%.3f ",num_of_spec_below_avg[spec_i]/width);
-	}
-	*/
-
-	int count=0,warning1=0,warning2=0,warning3=0;
-
-	printf("detect ");
-	//连续5个点低于0.65的段数量不应该大于5
-	for (int spec_i = 800 ; spec_i < speclen ; spec_i++)
-		{
-			if (num_of_spec_below_avg[spec_i]/width<0.65)
-			{
-				count++;
-				if (count>5) {warning1++;/*printf("%d ",spec_i);*/count=0;}
-			}
-		}
-
-	//连续8个点低于0.7的段数量不应该大于10
-	count=0;
-	for (int spec_i = 800 ; spec_i < speclen ; spec_i++)
-	{
-		if (num_of_spec_below_avg[spec_i]/width<0.7)
-		{
-			count++;
-			if (count>8) {warning2++;count=0;}
-		}
-	}
-
-	//判断最高的2%的频率的总能量是否超过0.5，不操过的都是有丢失的
-	for (int spec_i = 980 ; spec_i < speclen ; spec_i++)
-	{
-		if (spec_sum[spec_i]<0.5) warning3++;
+		if (spec_sum[spec_i]<0.5) count1++;
+		if (spec_sum[spec_i]<1) count2++;
 		//for debug
 		//printf("%.3f\t",spec_sum[spec_i]);
 	}
-
-	//按照时域进行检查
-	//统计低频部分的时域能量和
-	float * time_sum_low = NULL ; 
-	time_sum_low = calloc (width, sizeof (float *)) ;
-	for ( w = 0 ; w < width ; w++)
-		for (int spec_i = 0 ; spec_i < floor(speclen/2) ; spec_i++)
-		{
-			time_sum_low[w]+=spec_x[w][spec_i];
-		}
-	//统计高频部分的时域能量和
-	float * time_sum_high = NULL ; 
-	time_sum_high = calloc (width, sizeof (float *)) ;
-	for ( w = 0 ; w < width ; w++)
-		for (int spec_i = floor(speclen/2) ; spec_i < speclen ; spec_i++)
-		{
-			time_sum_high[w]+=spec_x[w][spec_i];
-		}
-    
-    int warning4=0;
-	for ( w = 0 ; w < width ; w++)
-	{
-		if (time_sum_high[w]/time_sum_low[w]<0.01) warning4++;
-	}
+	if (count1>50&&count2>100) 
+		printf("invalid\t%d|%d\n",count1,count2) ;
+	else
+		printf("ok\n") ;
 	
-	//暂时不考虑部分能量缺失的情况
-	//if ((warning1>4 && warning2>4) || (warning3>10) || (warning4>100)) {printf("loss warning1=%d\twarning2=%d\twarning3=%d\twarning4=%d\n",warning1,warning2,warning3,warning4);} else {printf("ok\n");}
-	if ((warning1>4 && warning2>4) || (warning3>10) ) {printf("loss warning1=%d\twarning2=%d\twarning3=%d\twarning4=%d\n",warning1,warning2,warning3,warning4);} else {printf("ok\n");}
-	
-	//for debug
-	//printf("loss warning1=%d\twarning2=%d\twarning3=%d\twarning4=%d\n",warning1,warning2,warning3,warning4);
-	/*
-	for (int th=5;th<15;th++) {printf("\t%d",th);};
-
-	for (float t_value=0.75;t_value>0.65;t_value-=0.01) //绝对值
-	{	
-		printf("\n%.2f:\t",t_value);
-		for (int th=5;th<15;th++) //阈值
-		{
-			for (int spec_i = 0 ; spec_i < speclen ; spec_i++)
-			{
-				if (num_of_spec_below_avg[spec_i]/width<t_value)
-				{
-					count++;
-					if (count>th) {warning++;count=0;}
-				}
-			}
-			printf("%d\t",warning);
-			warning=0;
-		}
-		
-	}
-	printf("\n=========================================\n");
-	*/
-
-
-
-
 
 	destroy_spectrum (spec) ;
 
@@ -602,7 +496,7 @@ main (int argc, char * argv [])
 
 	render.sndfilepath = argv[1] ;
 	render.width = 1000 ; //改为2000更好（少检测1个错误），但1000更快
-	render.height = 1000 ;
+	render.height = 100 ;
 
 	render.filename = strrchr (render.sndfilepath, '/') ;
 	render.filename = (render.filename != NULL) ? render.filename + 1 : render.sndfilepath ;

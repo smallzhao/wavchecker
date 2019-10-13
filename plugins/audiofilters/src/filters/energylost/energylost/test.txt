@@ -1,0 +1,702 @@
+datatangdeMacBook-Air:lossenergy datatang$ for file in OK/*; do ./lossenergy $file; done
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+detect ok
+datatangdeMacBook-Air:lossenergy datatang$ for file in LOSS/*; do ./lossenergy $file; done
+detect loss warning1=23	warning1=18
+detect loss warning1=15	warning1=12
+detect loss warning1=14	warning1=14
+detect loss warning1=11	warning1=8
+detect loss warning1=13	warning1=13
+detect loss warning1=21	warning1=15
+detect loss warning1=21	warning1=15
+detect loss warning1=14	warning1=12
+detect loss warning1=13	warning1=11
+detect loss warning1=16	warning1=14
+detect loss warning1=18	warning1=14
+detect loss warning1=22	warning1=17
+detect loss warning1=22	warning1=15
+detect loss warning1=11	warning1=9
+detect loss warning1=11	warning1=10
+detect loss warning1=24	warning1=19
+detect loss warning1=13	warning1=15
+detect loss warning1=18	warning1=15
+detect loss warning1=22	warning1=15
+detect loss warning1=14	warning1=12
+detect loss warning1=18	warning1=15
+detect loss warning1=30	warning1=21
+detect loss warning1=13	warning1=10
+detect loss warning1=25	warning1=21
+detect loss warning1=22	warning1=17
+detect loss warning1=12	warning1=10
+detect loss warning1=37	warning1=27
+detect loss warning1=11	warning1=10
+detect loss warning1=12	warning1=10
+detect loss warning1=13	warning1=12
+detect loss warning1=27	warning1=20
+detect loss warning1=18	warning1=16
+detect loss warning1=15	warning1=13
+detect loss warning1=22	warning1=16
+detect loss warning1=21	warning1=15
+detect loss warning1=22	warning1=16
+detect loss warning1=23	warning1=16
+detect loss warning1=16	warning1=15
+detect loss warning1=22	warning1=17
+detect loss warning1=18	warning1=15
+detect loss warning1=12	warning1=11
+detect loss warning1=6	warning1=7
+detect loss warning1=13	warning1=12
+detect loss warning1=16	warning1=18
+detect loss warning1=12	warning1=10
+detect loss warning1=14	warning1=12
+detect loss warning1=21	warning1=14
+detect loss warning1=11	warning1=12
+detect loss warning1=17	warning1=14
+detect ok
+detect loss warning1=12	warning1=13
+detect loss warning1=21	warning1=15
+detect loss warning1=24	warning1=19
+detect loss warning1=15	warning1=14
+detect loss warning1=17	warning1=14
+detect loss warning1=18	warning1=14
+detect loss warning1=17	warning1=12
+detect loss warning1=13	warning1=11
+detect loss warning1=15	warning1=12
+detect loss warning1=22	warning1=15
+detect loss warning1=15	warning1=13
+detect loss warning1=14	warning1=13
+detect loss warning1=16	warning1=14
+detect loss warning1=13	warning1=11
+detect loss warning1=11	warning1=9
+detect loss warning1=12	warning1=8
+detect loss warning1=13	warning1=12
+detect loss warning1=10	warning1=8
+detect loss warning1=13	warning1=13
+detect loss warning1=13	warning1=10
+detect loss warning1=20	warning1=15
+detect loss warning1=18	warning1=15
+detect loss warning1=16	warning1=14
+detect loss warning1=13	warning1=14
+detect loss warning1=22	warning1=18
+detect loss warning1=19	warning1=15
+detect loss warning1=14	warning1=13
+detect loss warning1=13	warning1=11
+detect loss warning1=12	warning1=10
+detect loss warning1=19	warning1=15
+detect loss warning1=12	warning1=10
+detect loss warning1=20	warning1=15
+detect loss warning1=14	warning1=12
+detect loss warning1=12	warning1=13
+detect loss warning1=14	warning1=12
+detect loss warning1=11	warning1=9
+detect loss warning1=11	warning1=9
+detect loss warning1=22	warning1=16
+detect loss warning1=12	warning1=11
+detect loss warning1=10	warning1=8
+detect loss warning1=16	warning1=14
+detect loss warning1=12	warning1=10
+detect loss warning1=11	warning1=12
+detect loss warning1=12	warning1=11
+detect loss warning1=16	warning1=13
+detect loss warning1=10	warning1=8
+detect loss warning1=16	warning1=13
+detect loss warning1=19	warning1=14
+detect loss warning1=18	warning1=14
+detect loss warning1=10	warning1=9
+detect loss warning1=7	warning1=7
+detect loss warning1=15	warning1=14
+detect loss warning1=10	warning1=13
+detect loss warning1=14	warning1=14
+detect loss warning1=18	warning1=15
+detect loss warning1=12	warning1=14
+detect loss warning1=11	warning1=12
+detect loss warning1=13	warning1=11
+detect loss warning1=23	warning1=21
+detect loss warning1=12	warning1=12
+detect loss warning1=12	warning1=11
+detect loss warning1=13	warning1=10
+detect loss warning1=12	warning1=8
+detect loss warning1=12	warning1=13
+detect loss warning1=15	warning1=14
+detect loss warning1=15	warning1=13
+detect loss warning1=19	warning1=15
+detect loss warning1=23	warning1=19
+detect loss warning1=31	warning1=23
+detect loss warning1=11	warning1=10
+detect loss warning1=42	warning1=29
+detect loss warning1=13	warning1=14
+detect loss warning1=13	warning1=15
+detect loss warning1=12	warning1=9
+detect loss warning1=15	warning1=12
+detect loss warning1=12	warning1=13
+detect loss warning1=13	warning1=10
+detect loss warning1=11	warning1=10
+detect loss warning1=11	warning1=9
+detect loss warning1=11	warning1=9
+detect loss warning1=11	warning1=9
+detect loss warning1=13	warning1=15
+detect loss warning1=8	warning1=7
+detect loss warning1=11	warning1=9
+detect loss warning1=12	warning1=11
+detect loss warning1=14	warning1=13
+detect loss warning1=16	warning1=13
+detect loss warning1=16	warning1=13
+detect loss warning1=14	warning1=11
+detect loss warning1=7	warning1=7
+detect loss warning1=8	warning1=8
+detect loss warning1=14	warning1=13
+detect loss warning1=8	warning1=11
+detect loss warning1=7	warning1=6
+detect loss warning1=22	warning1=15
+detect loss warning1=22	warning1=16
+detect loss warning1=23	warning1=19
+detect loss warning1=16	warning1=15
+detect loss warning1=23	warning1=17
+detect loss warning1=10	warning1=9
+detect loss warning1=15	warning1=12
+detect loss warning1=27	warning1=21
+detect loss warning1=13	warning1=12
+detect loss warning1=13	warning1=10
+detect loss warning1=20	warning1=14
+detect loss warning1=17	warning1=17
+detect loss warning1=13	warning1=12
+detect loss warning1=23	warning1=17
+detect loss warning1=18	warning1=18
+detect loss warning1=25	warning1=18
+detect loss warning1=19	warning1=15
+detect loss warning1=21	warning1=16
+detect loss warning1=29	warning1=22
+detect loss warning1=22	warning1=20
+detect loss warning1=31	warning1=23
+detect loss warning1=21	warning1=15
+detect loss warning1=21	warning1=16
+detect loss warning1=27	warning1=24
+detect loss warning1=20	warning1=14
+detect loss warning1=17	warning1=13
+detect loss warning1=21	warning1=16
+detect loss warning1=21	warning1=19
+detect loss warning1=23	warning1=17
+detect loss warning1=22	warning1=16
+detect loss warning1=14	warning1=13
+detect loss warning1=25	warning1=20
+detect loss warning1=25	warning1=17
+detect loss warning1=30	warning1=22
+detect loss warning1=21	warning1=15
+detect loss warning1=27	warning1=20
+detect loss warning1=27	warning1=21
+detect loss warning1=29	warning1=20
+detect loss warning1=26	warning1=20
+detect loss warning1=24	warning1=18
+detect loss warning1=23	warning1=19
+detect loss warning1=21	warning1=16
+detect loss warning1=18	warning1=15
+detect loss warning1=17	warning1=14
+detect loss warning1=20	warning1=15
+detect loss warning1=26	warning1=26
+detect loss warning1=22	warning1=17
+detect loss warning1=15	warning1=18
+detect loss warning1=25	warning1=20
+detect loss warning1=26	warning1=21
+detect loss warning1=20	warning1=15
+detect loss warning1=20	warning1=17
+detect loss warning1=24	warning1=18
+detect loss warning1=22	warning1=17
+detect loss warning1=29	warning1=21
+detect loss warning1=16	warning1=14
+detect loss warning1=20	warning1=16
+detect loss warning1=20	warning1=15
+detect loss warning1=20	warning1=17
+detect loss warning1=23	warning1=16
+detect loss warning1=21	warning1=18
+detect loss warning1=37	warning1=31
+detect loss warning1=19	warning1=17
+detect loss warning1=24	warning1=18
+detect loss warning1=22	warning1=16
+detect loss warning1=16	warning1=15
+detect loss warning1=22	warning1=18
+detect loss warning1=17	warning1=15
+detect loss warning1=14	warning1=12
+detect loss warning1=25	warning1=19
+detect loss warning1=22	warning1=17
+detect loss warning1=16	warning1=18
+detect loss warning1=19	warning1=14
+detect loss warning1=25	warning1=19
+detect loss warning1=19	warning1=15
+detect loss warning1=13	warning1=12
+detect loss warning1=16	warning1=14
+detect loss warning1=24	warning1=21
+detect loss warning1=20	warning1=15
+detect loss warning1=29	warning1=22
+detect loss warning1=26	warning1=21
+detect loss warning1=19	warning1=17
+detect loss warning1=22	warning1=18
+detect loss warning1=20	warning1=18
+detect loss warning1=25	warning1=21
+detect loss warning1=20	warning1=16
+detect loss warning1=12	warning1=13
+detect loss warning1=27	warning1=25
+detect loss warning1=23	warning1=19
+detect loss warning1=26	warning1=25
+detect loss warning1=47	warning1=35
+detect loss warning1=44	warning1=32
+detect loss warning1=23	warning1=18
+detect loss warning1=40	warning1=32
+detect loss warning1=21	warning1=16
+detect loss warning1=21	warning1=15
+detect loss warning1=29	warning1=24
+detect loss warning1=30	warning1=24
+detect loss warning1=28	warning1=23
+detect loss warning1=28	warning1=22
+detect loss warning1=23	warning1=18
+detect loss warning1=20	warning1=14
+detect loss warning1=32	warning1=22
+detect loss warning1=19	warning1=16
+detect loss warning1=17	warning1=14
+detect loss warning1=14	warning1=12
+detect loss warning1=21	warning1=17
+detect loss warning1=11	warning1=8
+detect loss warning1=14	warning1=18
+detect loss warning1=12	warning1=10
+detect loss warning1=11	warning1=8
+detect loss warning1=12	warning1=11
+detect loss warning1=12	warning1=12
+detect loss warning1=11	warning1=11
+detect loss warning1=19	warning1=18
+detect loss warning1=11	warning1=10
+detect loss warning1=21	warning1=20
+detect loss warning1=15	warning1=17
+detect loss warning1=17	warning1=18
+detect loss warning1=14	warning1=12
+detect loss warning1=27	warning1=28
+detect loss warning1=18	warning1=14
+detect loss warning1=40	warning1=36
+detect loss warning1=17	warning1=15
+detect loss warning1=19	warning1=17
+detect loss warning1=39	warning1=33
+detect loss warning1=11	warning1=13
+detect loss warning1=29	warning1=30
+detect loss warning1=30	warning1=31
+detect loss warning1=13	warning1=14
+detect loss warning1=32	warning1=30
+detect loss warning1=15	warning1=14
+detect loss warning1=10	warning1=9
+detect loss warning1=30	warning1=30
+detect loss warning1=18	warning1=14
+detect loss warning1=12	warning1=10
+detect loss warning1=25	warning1=20
+detect loss warning1=9	warning1=6
+detect loss warning1=15	warning1=14
+detect loss warning1=11	warning1=8
+detect loss warning1=12	warning1=11
+detect loss warning1=10	warning1=7
+detect loss warning1=11	warning1=8
+detect loss warning1=15	warning1=12
+detect loss warning1=16	warning1=15
+detect loss warning1=18	warning1=14
+detect loss warning1=11	warning1=8
+detect loss warning1=11	warning1=10
+detect loss warning1=20	warning1=19
+detect loss warning1=17	warning1=14
+detect loss warning1=14	warning1=12
+detect loss warning1=12	warning1=10
+detect loss warning1=12	warning1=11
+detect loss warning1=10	warning1=11
+detect loss warning1=10	warning1=8
+detect loss warning1=18	warning1=16
+detect loss warning1=11	warning1=13
+detect loss warning1=17	warning1=16
+detect loss warning1=17	warning1=14
+detect loss warning1=12	warning1=9
+detect loss warning1=16	warning1=12
+detect loss warning1=14	warning1=12
+detect loss warning1=12	warning1=9
+detect loss warning1=30	warning1=22
+detect loss warning1=23	warning1=17
+detect loss warning1=21	warning1=17
+detect loss warning1=16	warning1=14
+detect loss warning1=19	warning1=14
+detect loss warning1=20	warning1=15
+detect loss warning1=13	warning1=12
+detect loss warning1=13	warning1=13
+detect loss warning1=15	warning1=15
+detect loss warning1=36	warning1=26
+detect loss warning1=26	warning1=19
+detect loss warning1=24	warning1=18
+detect loss warning1=22	warning1=19
+detect loss warning1=24	warning1=21
+detect loss warning1=17	warning1=18
+detect loss warning1=27	warning1=20
+detect loss warning1=46	warning1=34
+detect loss warning1=19	warning1=15
+detect loss warning1=18	warning1=22
+detect loss warning1=26	warning1=20
+detect loss warning1=14	warning1=17
+detect loss warning1=15	warning1=14
+detect loss warning1=33	warning1=26
+detect loss warning1=30	warning1=23
+detect loss warning1=16	warning1=14
+detect loss warning1=29	warning1=23
+detect loss warning1=25	warning1=24
+detect loss warning1=16	warning1=23
+detect loss warning1=15	warning1=12
+detect loss warning1=14	warning1=12
+detect loss warning1=19	warning1=18
+detect loss warning1=20	warning1=15
+detect loss warning1=14	warning1=13
+detect loss warning1=14	warning1=15
+detect loss warning1=11	warning1=10
+detect loss warning1=21	warning1=16
+detect loss warning1=24	warning1=21
+detect loss warning1=30	warning1=29
+detect loss warning1=23	warning1=19
+detect loss warning1=16	warning1=14
+detect loss warning1=18	warning1=13
+detect loss warning1=16	warning1=13
+detect loss warning1=20	warning1=15
+detect loss warning1=18	warning1=16
+detect loss warning1=21	warning1=15
+detect loss warning1=18	warning1=14
+detect loss warning1=22	warning1=16
+detect loss warning1=16	warning1=17
+detect loss warning1=17	warning1=17
+detect loss warning1=13	warning1=11
+detect loss warning1=10	warning1=8
+detect loss warning1=21	warning1=15
+detect loss warning1=44	warning1=32
+detect loss warning1=25	warning1=23
+detect loss warning1=24	warning1=18
+detect loss warning1=15	warning1=13
+detect loss warning1=12	warning1=10
+detect loss warning1=34	warning1=25
+detect loss warning1=14	warning1=11
+detect loss warning1=13	warning1=10
+detect loss warning1=12	warning1=11
+detect loss warning1=13	warning1=12
+detect loss warning1=14	warning1=12
+detect loss warning1=11	warning1=9
+detect loss warning1=55	warning1=41
+detect loss warning1=22	warning1=15
+detect loss warning1=11	warning1=8
+detect loss warning1=12	warning1=14
+detect loss warning1=9	warning1=8
+detect loss warning1=11	warning1=9
+detect loss warning1=11	warning1=9
+detect loss warning1=11	warning1=8
+detect loss warning1=7	warning1=7
+detect loss warning1=10	warning1=8
+detect loss warning1=24	warning1=24
+detect loss warning1=28	warning1=27
+detect loss warning1=11	warning1=10
+detect loss warning1=13	warning1=12
+detect loss warning1=13	warning1=11
+detect loss warning1=10	warning1=8
+detect loss warning1=13	warning1=14
+detect loss warning1=11	warning1=8
+detect loss warning1=22	warning1=16
+detect loss warning1=9	warning1=7
+detect loss warning1=15	warning1=19
+detect loss warning1=12	warning1=10
+detect loss warning1=11	warning1=8
+detect loss warning1=11	warning1=10
+detect loss warning1=18	warning1=14
+detect loss warning1=16	warning1=13
+detect loss warning1=13	warning1=10
+detect loss warning1=12	warning1=12
+detect loss warning1=12	warning1=9

@@ -5,7 +5,7 @@ FFTW3 <http://www.fftw.org>
 libsndfile <https://github.com/erikd/libsndfile>
 
 ## 编译 ##
-	gcc -o lossenergy spectrogram.c window.c spectrum.c common.c -I/usr/local/include -L/usr/local/lib -lfftw3 -lsndfile 
+	gcc -o lossenergy lossenergy.c window.c spectrum.c common.c -I/usr/local/include -L/usr/local/lib -lfftw3 -lsndfile 
 	
 ## andriod编译 ##
 ### 编译依赖库libsndfile ###
