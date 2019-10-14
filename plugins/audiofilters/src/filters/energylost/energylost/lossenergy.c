@@ -432,8 +432,8 @@ render_to_surface (const RENDER * render, SNDFILE *infile, int samplerate, sf_co
 		//for debug
 		//printf("%.3f\t",spec_sum[spec_i]);
 	}
-	if (count1>50&&count2>100) 
-		printf("invalid\t%d|%d\n",count1,count2) ;
+	if (count1>50)
+		printf("invalid\t%d\n",count1) ;
 	else
 		printf("ok\n") ;
 	
